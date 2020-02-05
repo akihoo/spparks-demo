@@ -19,7 +19,7 @@ with open(logfile, "r") as f:
       pass
     else:
       # Extract all stats data
-      next(f); line = next(f) # skip to the first line of stats output
+      next(f); line = next(f); line = next(f); line = next(f); # skip to the first line of stats output
       while "Loop time" not in line:
         T, Naccept, Nreject, Nsweeps, CPU, Num, N, R = line.split()
         Time.append(float(T))
@@ -34,9 +34,9 @@ for time, N, R in zip(Time, Nclust, R_av):
       
 # write output to tab-delimited csv
 with open("cluster-stats.csv", "w") as f:
-  f.write("time\tNclust\tR_av\n")
+  f.write("time,Nclust,R_av\n")
   for time, N, R in zip(Time, Nclust, R_av):
-    f.write("{0}\t{1}\t{2}\n".format(time, N, R))
+    f.write("{0},{1},{2}\n".format(time, N, R))
 
 # try to plot with matplotlib
 try:
